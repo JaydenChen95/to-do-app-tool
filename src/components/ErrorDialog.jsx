@@ -12,7 +12,7 @@ function ErrorDialog({ show, onClose, title = 'Error', message = 'Something went
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
+        <Button variant="secondary" onClick={onClose} data-testid="error-dialog-close-button">
           Close
         </Button>
       </Modal.Footer>

@@ -62,7 +62,7 @@ export default function TaskItem({ task, onSave, onDelete, setError, onRestore }
         <div className="d-flex justify-content-between align-items-center">
           <div>
             <strong>{task.description}</strong> <br />
-            <small className={task.status === "Deleted" ? "text-danger" : "text-muted"}>{task.status}</small>
+            <small className={task.status === "Deleted" ? "text-danger" : "text-muted"} data-testid='status-display'>{task.status}</small>
           </div>
           {
             isLoading ? <Spinner /> :
@@ -90,12 +90,13 @@ export default function TaskItem({ task, onSave, onDelete, setError, onRestore }
           <div className="mt-3">
             <Form>
               <Form.Group className="mb-2">
-                <Form.Label>Description*</Form.Label>
+                <Form.Label data-testid="description">Description*</Form.Label>
                 <Form.Control
                   type="text"
                   name="description"
                   value={editedTask.description}
                   onChange={handleChange}
+                  data-testid="description-input"
                 />
               </Form.Group>
 
