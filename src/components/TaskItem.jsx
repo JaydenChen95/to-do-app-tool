@@ -221,7 +221,7 @@ export default function TaskItem({ task, onSave, onDelete, setError, onRestore }
 
               <hr />
 
-              <Button variant="success" size="sm" disabled={!formChange} onClick={handleSave}>
+              <Button variant="success" size="sm" disabled={!formChange || task.status === 'Deleted'} onClick={handleSave}>
                 Save
               </Button>
             </Form>
