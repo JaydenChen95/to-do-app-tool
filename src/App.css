@@ -1,42 +1,47 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.btn-add{
+  height: 30px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  background: #1C52BE;
+  border: 1px solid #1C52BE;
+  border-radius: 5px;
+  padding: 2px 15px;
+  color: #fff;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.search-todo{
+  height: 30px;
+  display: flex;
+  vertical-align: c;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #e8e7e7;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-header{
+  background-color: #fff !important;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.form-check-input[type=checkbox] {
+  border-radius: .5em;
+  cursor: pointer;
 }
 
-.card {
-  padding: 2em;
+.dropdown{
+
+  margin-left: 200px;
+}
+.dropdown-btn{
+  border: 1px solid lightgray;
+  font-size: 12px;
 }
 
-.read-the-docs {
-  color: #888;
+.bullet{
+  height: 7px;
+  width: 7px;
 }
