@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Card, Button, Form, Collapse, Row, Col } from 'react-bootstrap';
 import { convertISODateToDateField } from '../utils/dateConverter';
 import validate from '../utils/validate';
+import ButtonWithConfirm from './ButtonWithConfirm';
 
-export default function TaskItem({ task, onSave, setError }) {
+export default function TaskItem({ task, onSave, onDelete, setError, onRestore }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
 
@@ -59,11 +60,25 @@ export default function TaskItem({ task, onSave, setError }) {
         <div className="d-flex justify-content-between align-items-center">
           <div>
             <strong>{task.description}</strong> <br />
-            <small className="text-muted">{task.status}</small>
+            <small className={task.status === "Deleted" ? "text-danger" : "text-muted"}>{task.status}</small>
           </div>
-          <Button variant="outline-primary" size="sm" onClick={() => setIsEditing(!isEditing)}>
-            {isEditing ? 'Cancel' : 'Edit'}
-          </Button>
+          <Row>
+            <Col>{
+                    editedTask.status !== "Deleted" 
+                    && 
+                    (<Button variant="outline-primary" size="sm" onClick={() => setIsEditing(!isEditing)}>
+                      {isEditing ? 'Cancel' : 'Edit'}
+                    </Button>)
+                  }
+            </Col>
+            <Col>
+                {
+                editedTask.status === 'Deleted' ? (<ButtonWithConfirm taskId={editedTask.id} onConfirm={onRestore} type="Restore" />) : 
+                (<ButtonWithConfirm taskId={editedTask.id} onConfirm={onDelete} type="Delete" />)
+                }
+            </Col>
+          </Row>
+          
         </div>
 
         <Collapse in={isEditing}>

@@ -13,7 +13,6 @@ export async function createNewTask(data){
 export async function getAllTasks(){
     try {
         const response = await axios.get(`${API_URL}/to-do`);
-        console.log(response)
         return response.data;
     } catch (e){
         console.error(e);
@@ -22,9 +21,17 @@ export async function getAllTasks(){
 
 export async function editTask(editedTask){
     const { id } = editedTask;
-    console.log(editedTask)
     try {
         await axios.put(`${API_URL}/to-do/${id}`, editedTask);
+    } catch (e){
+        console.error(e);
+    }
+}
+
+export async function updateTaskStatus(id, status){
+    try {
+        const response = await axios.patch(`${API_URL}/to-do/${id}`, { status });
+        return response.data;
     } catch (e){
         console.error(e);
     }
