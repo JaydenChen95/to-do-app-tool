@@ -64,7 +64,7 @@ export default function TaskItem({ task, onSave, onDelete, setError, onRestore }
           </div>
           <Row>
             <Col>{
-                    editedTask.status !== "Deleted" 
+                    task.status !== "Deleted" 
                     && 
                     (<Button variant="outline-primary" size="sm" onClick={() => setIsEditing(!isEditing)}>
                       {isEditing ? 'Cancel' : 'Edit'}
@@ -73,7 +73,7 @@ export default function TaskItem({ task, onSave, onDelete, setError, onRestore }
             </Col>
             <Col>
                 {
-                editedTask.status === 'Deleted' ? (<ButtonWithConfirm taskId={editedTask.id} onConfirm={onRestore} type="Restore" />) : 
+                task.status === 'Deleted' ? (<ButtonWithConfirm taskId={editedTask.id} onConfirm={onRestore} type="Restore" />) : 
                 (<ButtonWithConfirm taskId={editedTask.id} onConfirm={onDelete} type="Delete" />)
                 }
             </Col>

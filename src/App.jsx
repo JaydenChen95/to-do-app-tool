@@ -143,9 +143,9 @@ function App() {
           <hr />
 
           {filteredTasks.map((task) => (
-          <TaskItem key={task.id} task={task} 
-            onSave={updateTask} setError={setError} onDelete={onDelete} onRestore={onRestore} />
-        ))}
+            <TaskItem key={task.id} task={task} 
+              onSave={updateTask} setError={setError} onDelete={onDelete} onRestore={onRestore} />
+          ))}
         </Card.Body>
       </Card>
       {error.show && (

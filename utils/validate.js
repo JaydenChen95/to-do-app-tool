@@ -4,7 +4,6 @@ export default function validate(editedtask){
   }
 
   if(editedtask.subTasks.length){
-    console.log('subtask' , editedtask.subTasks);
     const invalidSubTask = editedtask.subTasks.find(subTask => !subTask.description.trim());
     console.log(invalidSubTask);
     if(invalidSubTask){
