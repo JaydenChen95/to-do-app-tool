@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { FaTrash, FaUndo } from 'react-icons/fa';
 
-function ButtonWithConfirm({ onConfirm, taskId, type }) {
+function ButtonWithConfirm({ onConfirm, taskId, type, setIsLoading }) {
     const [show, setShow] = useState(false);
   
     const handleClose = () => setShow(false);
     const handleConfirm = () => {
-      onConfirm(taskId, type);
+      setIsLoading(true);
+      onConfirm(taskId, setIsLoading);
       setShow(false);
     };
   

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, Button, Form, Collapse, Row, Col } from 'react-bootstrap';
+import { Card, Button, Form, Collapse, Row, Col, Spinner } from 'react-bootstrap';
 import { convertISODateToDateField } from '../utils/dateConverter';
 import validate from '../utils/validate';
 import ButtonWithConfirm from './ButtonWithConfirm';
@@ -7,6 +7,7 @@ import ButtonWithConfirm from './ButtonWithConfirm';
 export default function TaskItem({ task, onSave, onDelete, setError, onRestore }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
+  const [isLoading, setIsLoading] = useState(false);
 
   // track if task is edited
   // if it's not, disable save button
@@ -50,7 +51,8 @@ export default function TaskItem({ task, onSave, onDelete, setError, onRestore }
           })
           return;
     }
-    onSave(editedTask);
+    setIsLoading(true);
+    onSave(editedTask, setIsLoading);
     setIsEditing(false);
   };
 
@@ -62,25 +64,28 @@ export default function TaskItem({ task, onSave, onDelete, setError, onRestore }
             <strong>{task.description}</strong> <br />
             <small className={task.status === "Deleted" ? "text-danger" : "text-muted"}>{task.status}</small>
           </div>
-          <Row>
-            <Col>{
-                    task.status !== "Deleted" 
-                    && 
-                    (<Button variant="outline-primary" size="sm" onClick={() => setIsEditing(!isEditing)}>
-                      {isEditing ? 'Cancel' : 'Edit'}
-                    </Button>)
-                  }
-            </Col>
-            <Col>
-                {
-                task.status === 'Deleted' ? (<ButtonWithConfirm taskId={editedTask.id} onConfirm={onRestore} type="Restore" />) : 
-                (<ButtonWithConfirm taskId={editedTask.id} onConfirm={onDelete} type="Delete" />)
-                }
-            </Col>
-          </Row>
-          
+          {
+            isLoading ? <Spinner /> :
+            (
+              <Row>
+                <Col>{
+                        task.status !== "Deleted" 
+                        && 
+                        (<Button variant="outline-primary" size="sm" onClick={() => setIsEditing(!isEditing)}>
+                          {isEditing ? 'Cancel' : 'Edit'}
+                        </Button>)
+                      }
+                </Col>
+                <Col>
+                    {
+                    task.status === 'Deleted' ? (<ButtonWithConfirm taskId={editedTask.id} onConfirm={onRestore} setIsLoading={setIsLoading} type="Restore" />) : 
+                    (<ButtonWithConfirm taskId={editedTask.id} onConfirm={onDelete} setIsLoading={setIsLoading} type="Delete" />)
+                    }
+                </Col>
+              </Row>
+            )
+          }
         </div>
-
         <Collapse in={isEditing}>
           <div className="mt-3">
             <Form>

@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap'
 
-import TaskItem from '../components/TaskItem';
-import ErrorDialog from '../components/ErrorDialog';
-import SearchBar from '../components/SearchBar';
+import TaskItem from './components/TaskItem';
+import ErrorDialog from './components/ErrorDialog';
+import SearchBar from './components/SearchBar';
 import { createNewTask, editTask, getAllTasks, updateTaskStatus } from './backend/toDoBackend';
-import { convertDateFieldToISODate } from '../utils/dateConverter';
+import { convertDateFieldToISODate } from './utils/dateConverter';
 
 function App() {
   const [todos, setTodos] = useState([{}]);
@@ -14,7 +14,7 @@ function App() {
   const [error, setError] = useState({ show: false, message: '' });
   const [searchTerm, setSearchTerm] = useState('');
 
-  const updateTask = async (updatedTask) => {
+  const updateTask = async (updatedTask, setIsLoading) => {
     if(updatedTask.dueDate) {
       updatedTask.dueDate = convertDateFieldToISODate(updatedTask.dueDate)
     }
@@ -32,13 +32,15 @@ function App() {
         show: true,
         message: "Server Error",
       });
+    } finally {
+      setIsLoading(false);
     }
     setTodos((prev) =>
       prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
     );
   };
 
-  const onDelete = async (taskId) => {
+  const onDelete = async (taskId, setIsLoading) => {
     try {
       const updatedTask = await updateTaskStatus(taskId, "Deleted");
       setTodos((prev) =>
@@ -49,10 +51,12 @@ function App() {
         show: true,
         message: "Failed to delete item",
       });
+    } finally {
+      setIsLoading(false)
     }
   }
 
-  const onRestore = async (taskId) => {
+  const onRestore = async (taskId, setIsLoading) => {
     try {
       const updatedTask = await updateTaskStatus(taskId, "Uncompleted");
       setTodos((prev) =>
@@ -63,6 +67,8 @@ function App() {
         show: true,
         message: "Failed to restore item",
       });
+    } finally {
+      setIsLoading(false)
     }
   }
 
