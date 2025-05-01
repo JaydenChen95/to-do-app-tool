@@ -6,7 +6,7 @@ COPY package.json ./
 
 COPY index.html ./
 
-RUN npm install && npm install -g serve
+RUN npm install --omit-dev && npm install -g serve
 
 COPY src/. src/.
 

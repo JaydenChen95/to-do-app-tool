@@ -1,15 +1,21 @@
-# React + Vite
+# Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple To do web app which allows user to add, edit, delete and restore deleted tasks. It also allows user to add other details such as priority an due date for each task. This app is generated with Vite.
 
-Currently, two official plugins are available:
+# Usage
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Before starting this app, make sure [to-do-app-backend](https://github.com/JaydenChen95/to-do-app-backend) is running locally first.
 
-## Expanding the ESLint configuration
+To start this app locally:
+1. Ensure `npm` is installed
+2. Run `npm ci`
+3. Run `npm run dev`
+4. Access the webapp through browser at http://localhost:5173
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Test
 
-# to-do-app-tool
-Frontend tool to manage To do tasks
+To run test, run `npm run test`.
+
+# Build Image
+
+To build docker image with `Dockerfile`, run `docker build -t to-do-app-tool .` at root directory.
